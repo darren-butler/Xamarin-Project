@@ -4,11 +4,11 @@
              xmlns:local="clr-namespace:IAD_Project"
              x:Class="IAD_Project.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+    <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+
+        <Label Text="Student's Toolkit!" />
+        <Button x:Name="btnNewCourse" Clicked="btnNewCourse_Clicked" Text="New Course" />
+
     </StackLayout>
 
 </ContentPage>

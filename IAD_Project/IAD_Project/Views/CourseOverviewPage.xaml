@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IAD_Project.Views.CourseOverviewPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            
+            <Label Text="Course Overview Page!" />
+            <Label x:Name="lblCourseName" Text="" />
+            <Label x:Name="lblCurrentYear" Text="" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

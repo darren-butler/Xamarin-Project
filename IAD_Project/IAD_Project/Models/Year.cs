@@ -22,6 +22,9 @@ namespace IAD_Project.Models
             GradeAverage = 0.0f;
 
             Modules = new List<Module>();
-        }
+
+        }// Year(int)
+
     }// Year
+
 }

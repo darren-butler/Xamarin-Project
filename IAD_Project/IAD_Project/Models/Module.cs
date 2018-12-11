@@ -26,6 +26,9 @@ namespace IAD_Project.Models
             Grade = 0.0f;
 
             Assessments = new List<Assessment>();
-        }
+
+        }// Module(string, float)
+
     }// Module
+
 }
