@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using IAD_Project.Models; // Allows access to classes in Models folder
+using IAD_Project.Views;
 
 
 namespace IAD_Project
@@ -14,7 +14,11 @@ namespace IAD_Project
         public MainPage()
         {
             InitializeComponent();
+        }
 
+        private async void btnNewCourse_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewCoursePage());
         }
     }
 }

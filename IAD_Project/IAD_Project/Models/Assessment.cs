@@ -22,6 +22,9 @@ namespace IAD_Project.Models
             Grade = 0.0f;
 
             Weight = weight;
-        }
+
+        }// Assessment(string float)
+
     }// Assessment
+
 }
