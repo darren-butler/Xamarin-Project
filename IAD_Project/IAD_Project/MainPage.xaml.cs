@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using IAD_Project.Models; // Allows access to classes in Models folder
+
 
 namespace IAD_Project
 {
@@ -12,6 +14,7 @@ namespace IAD_Project
         public MainPage()
         {
             InitializeComponent();
+
         }
     }
 }
