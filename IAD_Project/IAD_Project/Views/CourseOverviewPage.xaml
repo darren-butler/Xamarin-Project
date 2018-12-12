@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IAD_Project.Views.CourseOverviewPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <StackLayout x:Name="layout" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             
             <Label Text="Course Overview Page!" />
-            <Label x:Name="lblCourseName" Text="" />
-            <Label x:Name="lblCurrentYear" Text="" />
+            <!--<Button x:Name="btnYear" Clicked="btnYear_Clicked" Text="" />-->
 
         </StackLayout>
     </ContentPage.Content>
