@@ -18,7 +18,8 @@ namespace IAD_Project.Views
 		public NewCoursePage ()
 		{
 			InitializeComponent ();
-		}
+
+        }// NewCoursePage()
 
         private async void btnCreateCourse_Clicked(object sender, EventArgs e)
         {
@@ -29,7 +30,7 @@ namespace IAD_Project.Views
                 Course course = new Course(entCourseName.Text, Int32.Parse(entCoureNumOfYears.Text));
                 course.SerializeCourse();
 
-                await Navigation.PushAsync(new CourseOverviewPage());
+                await Navigation.PushAsync(new CourseOverviewPage(course));
             }
 
         }// btnCreateCourse_Clicked()

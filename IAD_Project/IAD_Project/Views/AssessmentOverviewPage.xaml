@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IAD_Project.Views.AssessmentOverviewPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            
+            <Label x:Name="lblAssessmentName" Text="Assessment: " />
+            <Label x:Name="lblAssessmentWeight" Text="Weight: " />
+            <Label x:Name="lblAssessmentGrade" Text="Grade: " />
+
+            <Button x:Name="btnUpdateGrade" Clicked="btnUpdateGrade_Clicked" Text="Enter Grade" />
+            <Entry x:Name="entUpdateGrade" Placeholder="Grade" IsVisible="False"/>
+
+            <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Module Overview" />
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -17,7 +17,7 @@ namespace IAD_Project.Models
         // Constructors
         public Year(int yearNum)
         {
-            YearNumber = yearNum;
+            YearNumber = yearNum+1;
 
             GradeAverage = 0.0f;
 
