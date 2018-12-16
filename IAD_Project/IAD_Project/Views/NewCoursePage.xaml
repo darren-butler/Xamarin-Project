@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
 
-            <Label Text="New Course Page!" />
+            <Label Text="Enter Course Details" />
             <Entry x:Name="entCourseName" Placeholder="Course Name" />
             <Entry x:Name="entCoureNumOfYears" Placeholder="Course Length" />
             <Button x:Name="btnCreateCourse" Clicked="btnCreateCourse_Clicked" Text="Create Course" />
