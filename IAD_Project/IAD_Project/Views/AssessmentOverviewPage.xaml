@@ -10,7 +10,7 @@
             <Label x:Name="lblAssessmentGrade" Text="Grade: " />
 
             <Button x:Name="btnUpdateGrade" Clicked="btnUpdateGrade_Clicked" Text="Enter Grade" />
-            <Entry x:Name="entUpdateGrade" Placeholder="Grade" IsVisible="False"/>
+            <Entry x:Name="entUpdateGrade" Placeholder="Grade" IsVisible="False" Keyboard="Numeric"/>
 
             <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Module Overview" />
 

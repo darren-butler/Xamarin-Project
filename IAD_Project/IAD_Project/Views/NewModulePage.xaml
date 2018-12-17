@@ -7,7 +7,7 @@
             
             <Label Text="Enter Module Details"/>
             <Entry x:Name="entModuleName" Placeholder="Name" />
-            <Entry x:Name="entModuleCredits" Placeholder="Credits" />
+            <Entry x:Name="entModuleCredits" Placeholder="Credits" Keyboard="Numeric"/>
             <Button x:Name="btnAddNewModule" Clicked="btnAddNewModule_Clicked" Text="Add" />
 
         </StackLayout>

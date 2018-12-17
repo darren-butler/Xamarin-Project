@@ -17,11 +17,16 @@ namespace IAD_Project.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CourseOverviewPage : ContentPage
 	{
-        public CourseOverviewPage (Course course)
+        Course course = new Course();
+
+        public CourseOverviewPage ()
         {      	
 			InitializeComponent();
+
+            // Initialize & Assign Course Variables
+            course = Utility.DeserializeCourse();
+
             SetupYearButtons(course);
-            lblTitle.Text += course.Name + " Overview";
 
         }// CourseOverviewPage()
 
@@ -33,7 +38,13 @@ namespace IAD_Project.Views
                 // https://stackoverflow.com/questions/6187944/how-can-i-create-a-dynamic-button-click-event-on-a-dynamic-button
                 Button btn = new Button(); // Create new button
                 btn.Clicked += new EventHandler(btnYearPage_Clicked); // Add YearOverviewPage Clicked Event to dynamic button
-                btn.Text = "Year " + course.Years[i].YearNumber.ToString() + ", Average: " + course.Years[i].GradeAverage.ToString(); // Add Year Details to button text
+
+                if(course.Years[i].Modules.Count != 0)
+                {
+                    course.Years[i].CalculateAverage();
+                }
+            
+                btn.Text = "Year " + course.Years[i].YearNumber.ToString() + ", Average: " + course.Years[i].GradeAverage.ToString("n2") + "%"; // Add Year Details to button text
                 btn.ClassId = i.ToString(); // Assign i to button class ID
 
                 layout.Children.Add(btn); // Add button to stack layout

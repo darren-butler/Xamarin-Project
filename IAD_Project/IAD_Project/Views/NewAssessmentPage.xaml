@@ -7,7 +7,7 @@
             
             <Label Text="Enter Assessment Details"/>
             <Entry x:Name="entAssessmentName" Placeholder="Name" />
-            <Entry x:Name="entAssessmentWeight" Placeholder="Weight" />
+            <Entry x:Name="entAssessmentWeight" Placeholder="Weight (%)" Keyboard="Numeric"/>
             <Button x:Name="btnAddNewAssessment" Clicked="btnAddNewAssessment_Clicked" Text="Add" />
 
         </StackLayout>

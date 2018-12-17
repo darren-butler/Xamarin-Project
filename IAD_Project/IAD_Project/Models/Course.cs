@@ -59,6 +59,7 @@ namespace IAD_Project.Models
 
         }// SerializeCourse()
 
+
     }// Course
 
 }

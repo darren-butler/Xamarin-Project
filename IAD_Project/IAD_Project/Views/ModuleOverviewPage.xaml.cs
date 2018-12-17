@@ -27,6 +27,8 @@ namespace IAD_Project.Views
             MODULE_INDEX = moduleIndex;
             course = Utility.DeserializeCourse();
 
+            course.Years[YEARNUM].Modules[MODULE_INDEX].CalculateGrade();
+
             Display();
 
         }// ModuleOverviewPage()
@@ -43,7 +45,7 @@ namespace IAD_Project.Views
             // Add Module name & credits to page labels
             lblModuleOverviewTitle.Text = course.Years[YEARNUM].Modules[MODULE_INDEX].Name +
                 " (" + course.Years[YEARNUM].Modules[MODULE_INDEX].Credits + " Credits)";
-            lblModuleGrade.Text = "Grade: " + course.Years[YEARNUM].Modules[MODULE_INDEX].Grade.ToString();
+            lblModuleGrade.Text = "Grade: " + course.Years[YEARNUM].Modules[MODULE_INDEX].Grade.ToString("n2") + "%";
 
         }// SetupPageTitles()
 

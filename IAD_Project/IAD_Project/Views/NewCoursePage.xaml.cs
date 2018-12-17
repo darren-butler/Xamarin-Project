@@ -26,12 +26,20 @@ namespace IAD_Project.Views
             // if - both input boxes aren't empty
             if (entCourseName.Text != null && entCoureNumOfYears.Text != null)
             {
-                // Create a new Course with input parameters & then serialize 
-                Course course = new Course(entCourseName.Text, Int32.Parse(entCoureNumOfYears.Text));
-                course.SerializeCourse();
+                if(int.TryParse(entCoureNumOfYears.Text, out int numOfYears)) // test if input is int
+                {
+                    if (numOfYears >= 1 && numOfYears < 7) // test if input is within reasonable range
+                    {
+                        // Create a new Course with input parameters & then serialize 
+                        Course course = new Course(entCourseName.Text, Int32.Parse(entCoureNumOfYears.Text));
+                        course.SerializeCourse();
 
-                await Navigation.PushAsync(new CourseOverviewPage(course));
-            }
+                        await Navigation.PushAsync(new CourseOverviewPage(/*course*/));
+                    }
+
+                }
+
+            }// if
 
         }// btnCreateCourse_Clicked()
 
