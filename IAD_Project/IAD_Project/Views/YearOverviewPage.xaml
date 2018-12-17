@@ -14,7 +14,7 @@
             </StackLayout>
 
             <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Course Overview" />
-            
-       </StackLayout>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

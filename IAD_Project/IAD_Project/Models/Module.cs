@@ -29,6 +29,18 @@ namespace IAD_Project.Models
 
         }// Module(string, float)
 
+
+        // Methods
+        public void CalculateGrade()
+        {
+            Grade = 0;
+            foreach (Assessment assessment in Assessments)
+            {
+                Grade += assessment.Grade * assessment.Weight;
+            }
+        }
+
+
     }// Module
 
 }

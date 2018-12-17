@@ -25,26 +25,19 @@ namespace IAD_Project.Views
             course = Utility.DeserializeCourse();
             YEARNUM = yearNum;
 
-            SetupModuleButtons(course, yearNum);
+            SetupModuleButtons(course, YEARNUM);
+            course.Years[YEARNUM].CalculateAverage();
+            course.SerializeCourse();
 
             // Add Course Name, Year Number & Year Average to title labels
-            lblYearOverviewTitle.Text = course.Name + " Year: " + course.Years[yearNum].YearNumber;
-            lblYearAverage.Text = "Average: " + course.Years[yearNum].GradeAverage;
+            lblYearOverviewTitle.Text = course.Name + " Year: " + course.Years[YEARNUM].YearNumber;
+            lblYearAverage.Text = "Average: " + course.Years[YEARNUM].GradeAverage.ToString("n2") + "%";
 
         }// YearOverviewPage()
 
         private void SetupModuleButtons(Course course, int yearNum)
         {
-            //if (course.Years[yearNum].Modules.Count == 0)
-            //{
-            //    Label lbl = new Label();
-            //    lbl.Text = "DEBUG - YOU HAVE NO MODULES";
-            //    layout.Children.Add(lbl);
-            //}
-            //else
-            //{
-
-            // Get length of Moduls list
+            // Get length of Modules list
             int numOfModules = course.Years[YEARNUM].Modules.Count;
 
             // Create & Add button for each Module in list
@@ -79,7 +72,7 @@ namespace IAD_Project.Views
 
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CourseOverviewPage(course));
+            await Navigation.PushAsync(new CourseOverviewPage(/*course*/));
 
         }// btnBACK_Clicked()
 

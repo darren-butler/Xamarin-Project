@@ -29,11 +29,24 @@ namespace IAD_Project.Views
 
         private async void btnAddNewModule_Clicked(object sender, EventArgs e)
         {
-            // Construct new Module Object with parameters from entry boxes, then add it to Modules list
-            course.Years[YEARNUM].Modules.Add(new Module(entModuleName.Text.ToString(), Int32.Parse(entModuleCredits.Text)));
-            course.SerializeCourse();
+            if(entModuleName.Text != null && entModuleCredits.Text != null)
+            {
 
-            await Navigation.PushAsync(new YearOverviewPage(YEARNUM));
+                if (float.TryParse(entModuleCredits.Text, out float credits))
+                {
+                    if(credits > 0 && credits < 60)
+                    {
+                        // Construct new Module Object with parameters from entry boxes, then add it to Modules list
+                        course.Years[YEARNUM].Modules.Add(new Module(entModuleName.Text.ToString(), credits));
+                        course.SerializeCourse();
+
+                        await Navigation.PushAsync(new YearOverviewPage(YEARNUM));
+                    }
+
+                }
+
+            }
+
 
         }// btnAddNewModule_Clicked()
     }

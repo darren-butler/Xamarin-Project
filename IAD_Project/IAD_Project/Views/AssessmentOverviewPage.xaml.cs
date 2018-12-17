@@ -37,7 +37,7 @@ namespace IAD_Project.Views
         {
             // Display Assessment Name & Weight
             lblAssessmentName.Text += course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Name;
-            lblAssessmentWeight.Text += course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Weight;
+            lblAssessmentWeight.Text += course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Weight*100 + "%";
 
             // if - Grade has not been added by user
             if (course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade == 0)
@@ -46,7 +46,7 @@ namespace IAD_Project.Views
             }
             else
             {
-                lblAssessmentGrade.Text += course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade; // set grade value to user entered value
+                lblAssessmentGrade.Text += course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString("n2"); // set grade value to user entered value
             }
 
         }// displayAssessmentOverview()
