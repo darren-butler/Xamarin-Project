@@ -19,7 +19,8 @@ namespace IAD_Project
                 Course c = Utility.DeserializeCourse();
                 course = c.DeepCopy();
 
-                btnCourseOverviewPage.IsVisible = true;
+                btnCourseOverviewPage.IsVisible = btnDeleteCourse.IsVisible = true;
+
             }
             catch
             {
@@ -43,6 +44,13 @@ namespace IAD_Project
 
         }// btnCourseOverviewPage_Clicked()
 
+        private void btnDeleteCourse_Clicked(object sender, EventArgs e)
+        {
+            btnCourseOverviewPage.IsVisible = btnDeleteCourse.IsVisible = false;
+
+            btnNewCourse.IsVisible = true;
+
+        }
     }// MainPage
 
 }

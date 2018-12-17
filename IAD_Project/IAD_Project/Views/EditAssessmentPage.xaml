@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IAD_Project.Views.EditAssessmentPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Label Text="Edit Assessment Page" />
+
+            <Button x:Name="btnEditName" Clicked="btnEditName_Clicked" Text="Edit Name" />
+            <Entry x:Name="entEditName" Placeholder="Name" IsVisible="False"/>
+
+            <Button x:Name="btnEditWeight" Clicked="btnEditWeight_Clicked" Text="Edit Weight" />
+            <Entry x:Name="entEditWeight" Placeholder="Weight" IsVisible="False" Keyboard="Numeric"/>
+
+            <Button x:Name="btnDeleteAssessment" Clicked="btnDeleteAssessment_Clicked" Text="Delete Assessment" />
+
+            <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Assessment Overview" />
+
+
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

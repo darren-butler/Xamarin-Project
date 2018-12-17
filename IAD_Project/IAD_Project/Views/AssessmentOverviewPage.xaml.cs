@@ -80,6 +80,11 @@ namespace IAD_Project.Views
 
         }// btnBACK_Clicked()
 
+        private async void btnEditAssessment_Clicked(object sender, EventArgs e)
+        {
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new EditAssessmentPage(course, YEAR_INDEX, MODULE_INDEX, ASSESSMENT_INDEX));
+        }
     }// AssessmentOverviewPage
 
 }
