@@ -9,6 +9,7 @@
         <Label Text="Student's Toolkit!" />
         <Button x:Name="btnNewCourse" Clicked="btnNewCourse_Clicked" Text="New Course" IsVisible="False"/>
         <Button x:Name="btnCourseOverviewPage" Clicked="btnCourseOverviewPage_Clicked" Text="My Course" IsVisible="False"/>
+        <Button x:Name="btnDeleteCourse" Clicked="btnDeleteCourse_Clicked" Text="Delete Course" IsVisible="False"/>
 
     </StackLayout>
 
