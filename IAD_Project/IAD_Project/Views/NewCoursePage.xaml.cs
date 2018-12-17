@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using IAD_Project.Models;
-using System.IO;
-using Newtonsoft.Json;
 
 namespace IAD_Project.Views
 {
@@ -21,6 +14,7 @@ namespace IAD_Project.Views
 
         }// NewCoursePage()
 
+
         private async void btnCreateCourse_Clicked(object sender, EventArgs e)
         {
             // if - both input boxes aren't empty
@@ -31,10 +25,10 @@ namespace IAD_Project.Views
                     if (numOfYears >= 1 && numOfYears < 7) // test if input is within reasonable range
                     {
                         // Create a new Course with input parameters & then serialize 
-                        Course course = new Course(entCourseName.Text, Int32.Parse(entCoureNumOfYears.Text));
-                        course.SerializeCourse();
+                        Course course = new Course(entCourseName.Text, int.Parse(entCoureNumOfYears.Text));
+                        course.SerializeCourse(); // save course to JSON file
 
-                        await Navigation.PushAsync(new CourseOverviewPage(/*course*/));
+                        await Navigation.PushAsync(new CourseOverviewPage(course));
                     }
 
                 }
@@ -43,6 +37,6 @@ namespace IAD_Project.Views
 
         }// btnCreateCourse_Clicked()
 
-    }
+    }// NewCoursePage
 
 }

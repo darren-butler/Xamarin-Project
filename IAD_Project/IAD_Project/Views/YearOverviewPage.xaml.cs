@@ -1,10 +1,5 @@
 ﻿using IAD_Project.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,67 +9,96 @@ namespace IAD_Project.Views
 	public partial class YearOverviewPage : ContentPage
 	{
         // Vars
-        int YEARNUM;
         Course course = new Course();
+        int YEAR_INDEX;
 
-        public YearOverviewPage (int yearNum)
+        public YearOverviewPage (Course c, int yearNum)
 		{           
             InitializeComponent ();
 
             // Initialize & Assign Course Variables
-            course = Utility.DeserializeCourse();
-            YEARNUM = yearNum;
+            course = c.DeepCopy();
+            YEAR_INDEX = yearNum;
 
-            SetupModuleButtons(course, YEARNUM);
-            course.Years[YEARNUM].CalculateAverage();
-            course.SerializeCourse();
-
-            // Add Course Name, Year Number & Year Average to title labels
-            lblYearOverviewTitle.Text = course.Name + " Year: " + course.Years[YEARNUM].YearNumber;
-            lblYearAverage.Text = "Average: " + course.Years[YEARNUM].GradeAverage.ToString("n2") + "%";
+            Display();
 
         }// YearOverviewPage()
 
-        private void SetupModuleButtons(Course course, int yearNum)
+
+        private void Display()
         {
+            SetupPageTitles();
+            SetupModuleButtons();
+
+        }// Display()
+
+
+        private void SetupPageTitles()
+        {
+            string gradeAverage = "NA";
+
+            course.Years[YEAR_INDEX].CalculateAverage();
+            course.SerializeCourse(); // save course to JSON file
+
+            if (course.Years[YEAR_INDEX].GradeAverage > 0 && course.Years[YEAR_INDEX].GradeAverage <= 100)
+            {
+                gradeAverage = course.Years[YEAR_INDEX].GradeAverage.ToString("n2") + "%";
+            }
+
+            // Add Course Name, Year Number & Year Average to title labels
+            lblYearOverviewTitle.Text = course.Name + " Year: " + course.Years[YEAR_INDEX].YearNumber;
+            lblYearAverage.Text = "GPA: " + gradeAverage;
+
+        }// SetupPageTitles()
+
+
+        private void SetupModuleButtons()
+        {
+
             // Get length of Modules list
-            int numOfModules = course.Years[YEARNUM].Modules.Count;
+            int numOfModules = course.Years[YEAR_INDEX].Modules.Count;
 
             // Create & Add button for each Module in list
             for (int i = 0; i < numOfModules; i++)
             {
                 Button btn = new Button();
                 btn.Clicked += new EventHandler(btnModulePage_Clicked);
-                btn.Text = course.Years[YEARNUM].Modules[i].Name;
+                btn.Text = course.Years[YEAR_INDEX].Modules[i].Name;
                 btn.ClassId = i.ToString(); // Assign i to button class ID
 
                 layout.Children.Add(btn);
-            }
-            //}
+
+            }// for
 
         }// SetupModuleButtons()
 
+
         private async void btnAddModule_Clicked(object sender, EventArgs e)
         {
-            int yearNum = YEARNUM;
-            await Navigation.PushAsync(new NewModulePage(yearNum));
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new NewModulePage(course, YEAR_INDEX));
 
         }// btnAddModule_Clicked()
+
 
         private async void btnModulePage_Clicked(object sender, EventArgs e)
         {
             Button button = sender as Button; // cast sender object to Button
-            int btnIndex = Int32.Parse(button.ClassId); // parse out button ID (i)
+            int btnIndex = int.Parse(button.ClassId); // parse out button ID (i)
 
-            await Navigation.PushAsync(new ModuleOverviewPage(YEARNUM, btnIndex));
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, btnIndex));
 
         }// btnModulePage_Clicked()
 
+
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CourseOverviewPage(/*course*/));
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new CourseOverviewPage(course));
 
         }// btnBACK_Clicked()
 
-    }
+    }// YearOverviewPage
+
 }

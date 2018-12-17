@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace IAD_Project.Models
 {
+    [Serializable()]
     public class Module
     {
-        // Vars
+        // 1. Vars
         public string Name { get; set; }
 
         public float Credits { get; set; }
@@ -16,7 +16,7 @@ namespace IAD_Project.Models
         public List<Assessment> Assessments { get; set; }
 
 
-        // Constructors
+        // 2. Constructors
         public Module(string name, float credits)
         {
             Name = name;
@@ -30,16 +30,36 @@ namespace IAD_Project.Models
         }// Module(string, float)
 
 
-        // Methods
+        // 3. Methods
         public void CalculateGrade()
         {
             Grade = 0;
+
             foreach (Assessment assessment in Assessments)
             {
                 Grade += assessment.Grade * assessment.Weight;
             }
-        }
 
+        }// CalculateGrade()
+
+        public bool ValidateAssessmentWeights()
+        {
+            bool isInValid = true;
+            float weightTotal = 0;
+
+            foreach (Assessment assessment in Assessments)
+            {
+                weightTotal += assessment.Weight;
+            }
+
+            if (weightTotal > 1)
+            {
+                isInValid = false;
+            }
+
+            return isInValid;
+
+        }// ValidateGradeWeights()
 
     }// Module
 

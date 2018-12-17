@@ -1,10 +1,5 @@
 ﻿using IAD_Project.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,24 +9,23 @@ namespace IAD_Project.Views
 	public partial class ModuleOverviewPage : ContentPage
 	{
         // Vars
-        int YEARNUM;
-        int MODULE_INDEX;
         Course course = new Course();
+        int YEAR_INDEX;
+        int MODULE_INDEX;
 
-        public ModuleOverviewPage(int yearNum, int moduleIndex)
+        public ModuleOverviewPage(Course c, int yearNum, int moduleIndex)
         {
             InitializeComponent();
 
             // Initialize & Assign Course Variables
-            YEARNUM = yearNum;
+            course = c.DeepCopy();
+            YEAR_INDEX = yearNum;
             MODULE_INDEX = moduleIndex;
-            course = Utility.DeserializeCourse();
-
-            course.Years[YEARNUM].Modules[MODULE_INDEX].CalculateGrade();
 
             Display();
 
         }// ModuleOverviewPage()
+
 
         private void Display()
         {
@@ -40,19 +34,39 @@ namespace IAD_Project.Views
 
         }// Display()
 
+
         private void SetupPageTitles()
         {
+            string grade = "NA";
+
+            course.Years[YEAR_INDEX].Modules[MODULE_INDEX].CalculateGrade();
+            course.SerializeCourse(); // save course to JSON file
+
+
+            // if - test if user grade is NaN
+            if (course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Grade != 0)
+            {
+                grade = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Grade.ToString("n2") + "%";
+            }
+
             // Add Module name & credits to page labels
-            lblModuleOverviewTitle.Text = course.Years[YEARNUM].Modules[MODULE_INDEX].Name +
-                " (" + course.Years[YEARNUM].Modules[MODULE_INDEX].Credits + " Credits)";
-            lblModuleGrade.Text = "Grade: " + course.Years[YEARNUM].Modules[MODULE_INDEX].Grade.ToString("n2") + "%";
+            lblModuleOverviewTitle.Text = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Name +
+                " (" + course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Credits + " Credits)";
+            lblModuleGrade.Text = "Grade: " + grade;
+
+            // if - Validate if grade module assessment weight total exceed 1;
+            if (!course.Years[YEAR_INDEX].Modules[MODULE_INDEX].ValidateAssessmentWeights())
+            {
+                btnWarningMessage.IsVisible = true; // display warning message
+            }
 
         }// SetupPageTitles()
+
 
         private void SetupAssessmentButtons()
         {
             // Get length of Assessments list
-            int numOfAssessments = course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments.Count;
+            int numOfAssessments = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments.Count;
 
             // Create buttons for each Assessment Object
             for(int i = 0; i < numOfAssessments; i++)
@@ -60,8 +74,8 @@ namespace IAD_Project.Views
                 // Same technique as in CourseOverviewPage
                 Button btn = new Button();
                 btn.Clicked += new EventHandler(btnAssessmentPage_Clicked);
-                btn.Text = course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[i].Name + ", " +
-                    course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[i].Grade + "%";
+                btn.Text = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[i].Name + ", " +
+                    course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[i].Grade + "%";
                 btn.ClassId = i.ToString();
 
                 layout.Children.Add(btn);
@@ -69,28 +83,36 @@ namespace IAD_Project.Views
 
         }// SetupAssessmentButtons()
 
+
         private async void btnAssessmentPage_Clicked(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            int btnIndex = Int32.Parse(button.ClassId);
-            await Navigation.PushAsync(new AssessmentOverviewPage(YEARNUM, MODULE_INDEX, btnIndex));
+            int btnIndex = int.Parse(button.ClassId);
+
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new AssessmentOverviewPage(course, YEAR_INDEX, MODULE_INDEX, btnIndex));
 
         }// btnAssessmentPage_Clicked()
 
+
         private async void btnAddAssessment_Clicked(object sender, EventArgs e)
         {
-            int yearNum = YEARNUM;
+            int yearNum = YEAR_INDEX;
             int moduleInex = MODULE_INDEX;
 
-            await Navigation.PushAsync(new NewAssessmentPage(YEARNUM, MODULE_INDEX));
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new NewAssessmentPage(course, YEAR_INDEX, MODULE_INDEX));
 
         }// btnAddAssessment_Clicked()
 
+
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new YearOverviewPage(YEARNUM));
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new YearOverviewPage(course, YEAR_INDEX));
 
         }// btnBACK_Clicked()
 
-    }
+    }// ModuleOverviewPage
+
 }

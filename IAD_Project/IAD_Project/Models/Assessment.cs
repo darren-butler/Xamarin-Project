@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IAD_Project.Models
 {
+    [Serializable()]
     public class Assessment
     {
-        // Vars
+        // 1. Vars
         public string Name { get; set; }
 
         public float Grade { get; set; }
@@ -14,7 +13,7 @@ namespace IAD_Project.Models
         public float Weight { get; set; }
 
 
-        // Constructors
+        // 2. Constructors
         public Assessment(string name, float weight)
         {
             Name = name;

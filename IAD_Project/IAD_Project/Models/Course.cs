@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace IAD_Project.Models
 {
+    [Serializable()]
     public class Course
     {
-        // Vars
+        // 1. Vars
         public string Name { get; set; }
 
         public int NumOfYears { get; set; }
@@ -16,7 +15,7 @@ namespace IAD_Project.Models
         public Year[] Years { get; set; }
 
 
-        // Constructors
+        // 2. Constructors
         public Course()
         {
             Name = "DEFAULT_NAME";
@@ -42,11 +41,11 @@ namespace IAD_Project.Models
             for (int i = 0; i < numOfYears; i++)
             {
                 Years[i] = new Year(i);
-            }       
+            }
         }// Course(string, int)
 
 
-        // Methods
+        // 3. Methods
         public void SerializeCourse()
         {
             string jsonOutput = JsonConvert.SerializeObject(this);
@@ -59,7 +58,6 @@ namespace IAD_Project.Models
 
         }// SerializeCourse()
 
-
-    }// Course
+    }
 
 }
