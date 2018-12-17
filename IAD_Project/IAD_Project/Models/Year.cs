@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace IAD_Project.Models
 {
+    [Serializable()]
     public class Year
     {
-        // Vars
+        // 1. Vars
         public int YearNumber { get; set; }
 
         public float GradeAverage { get; set; }
 
-        //public float YearCredits { get; set; }
-
         public List<Module> Modules { get; set; }
 
 
-        // Constructors
+        // 2. Constructors
         public Year(int yearNum)
         {
             YearNumber = yearNum+1;
@@ -30,7 +28,7 @@ namespace IAD_Project.Models
         }// Year(int)
 
 
-        // Methods
+        // 3. Methods
         public void CalculateAverage()
         {
             float sum = 0;
@@ -46,8 +44,6 @@ namespace IAD_Project.Models
             GradeAverage = sum / Modules.Count;
 
         }// CalculateAverage()
-
-
 
     }// Year
 

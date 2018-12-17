@@ -1,36 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using IAD_Project.Models;
-using IAD_Project.Views;
-using Newtonsoft.Json;
-using System.IO;
 
 namespace IAD_Project.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CourseOverviewPage : ContentPage
 	{
+        // Vars
         Course course = new Course();
 
-        public CourseOverviewPage ()
+        public CourseOverviewPage (Course c)
         {      	
 			InitializeComponent();
 
             // Initialize & Assign Course Variables
-            course = Utility.DeserializeCourse();
+            course = c.DeepCopy();
 
-            SetupYearButtons(course);
+            SetupYearButtons();
 
         }// CourseOverviewPage()
 
-        private void SetupYearButtons(Course course)
+
+        private void SetupYearButtons()
         {
             // Create buttons for each Year object
             for (int i = 0; i < course.NumOfYears; i++)
@@ -42,9 +35,16 @@ namespace IAD_Project.Views
                 if(course.Years[i].Modules.Count != 0)
                 {
                     course.Years[i].CalculateAverage();
+                    course.SerializeCourse(); // save course to JSON file
                 }
-            
-                btn.Text = "Year " + course.Years[i].YearNumber.ToString() + ", Average: " + course.Years[i].GradeAverage.ToString("n2") + "%"; // Add Year Details to button text
+
+                string gradeAverage = "NA";
+                if (course.Years[i].GradeAverage > 0 && course.Years[i].GradeAverage <= 100)
+                {
+                    gradeAverage = course.Years[i].GradeAverage.ToString("n2") + "%";
+                }
+
+                btn.Text = "Year " + course.Years[i].YearNumber.ToString() + ", Average: " + gradeAverage; // Add Year Details to button text
                 btn.ClassId = i.ToString(); // Assign i to button class ID
 
                 layout.Children.Add(btn); // Add button to stack layout
@@ -53,19 +53,25 @@ namespace IAD_Project.Views
 
         }// SetupYearButtons()
 
+
         protected async void btnYearPage_Clicked(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            int btnIndex = Int32.Parse(button.ClassId); // parse out button ID (i)
+            int btnIndex = int.Parse(button.ClassId); // parse out button ID (i)
 
-            await Navigation.PushAsync(new YearOverviewPage(btnIndex));
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new YearOverviewPage(course, btnIndex));
 
         }// btnYearPage_Clicked()
 
+
         private async void btnBack_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PopToRootAsync();
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new MainPage());
 
         }// btnBack_Clicked()
-    }
+
+    }// CourseOverviewPage
+
 }

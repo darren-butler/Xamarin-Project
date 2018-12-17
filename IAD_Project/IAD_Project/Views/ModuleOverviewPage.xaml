@@ -15,6 +15,8 @@
 
             <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Year Overview" />
 
+            <Label x:Name="btnWarningMessage" Text="WARNING - GRADE WEIGHTS EXCEED 100%" TextColor="Red" IsVisible="False"/>  
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

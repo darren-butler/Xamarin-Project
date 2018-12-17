@@ -1,9 +1,5 @@
 ﻿using IAD_Project.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,19 +9,20 @@ namespace IAD_Project.Views
 	public partial class AssessmentOverviewPage : ContentPage
 	{
         // Vars
-        int YEARNUM;
+        Course course = new Course();
+        int YEAR_INDEX;
         int MODULE_INDEX;
         int ASSESSMENT_INDEX;
-        Course course = new Course();
+        
         bool isUpdateClicked = false;
 
-        public AssessmentOverviewPage (int yearNum, int moduleIndex, int assessmentIndex)
+        public AssessmentOverviewPage (Course c, int yearNum, int moduleIndex, int assessmentIndex)
 		{
 			InitializeComponent ();
 
             // Initialize & Assign Course Variables
-            course = Utility.DeserializeCourse();
-            YEARNUM = yearNum;
+            course = c.DeepCopy();
+            YEAR_INDEX = yearNum;
             MODULE_INDEX = moduleIndex;
             ASSESSMENT_INDEX = assessmentIndex;
 
@@ -33,23 +30,25 @@ namespace IAD_Project.Views
 
         }// AssessmentOverviewPage()
 
+
         private void displayAssessmentOverview()
         {
             // Display Assessment Name & Weight
-            lblAssessmentName.Text += course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Name;
-            lblAssessmentWeight.Text += course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Weight*100 + "%";
+            lblAssessmentName.Text += course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Name;
+            lblAssessmentWeight.Text += course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Weight*100 + "%";
 
             // if - Grade has not been added by user
-            if (course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade == 0)
+            if (course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade == 0)
             {
                 lblAssessmentGrade.Text += "n/a"; // set grade value to n/a
             }
             else
             {
-                lblAssessmentGrade.Text += course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString("n2"); // set grade value to user entered value
+                lblAssessmentGrade.Text += course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString("n2"); // set grade value to user entered value
             }
 
         }// displayAssessmentOverview()
+
 
         private void btnUpdateGrade_Clicked(object sender, EventArgs e)
         {
@@ -63,9 +62,10 @@ namespace IAD_Project.Views
             }
             else if (isUpdateClicked == false)
             {
-                course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade = float.Parse(entUpdateGrade.Text);
-                lblAssessmentGrade.Text = "Grade: " + course.Years[YEARNUM].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString();
-                course.SerializeCourse();
+                course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade = float.Parse(entUpdateGrade.Text);
+                lblAssessmentGrade.Text = "Grade: " + course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString();
+
+                course.SerializeCourse(); // save course to JSON file
 
                 entUpdateGrade.IsVisible = false;
             }
@@ -75,8 +75,11 @@ namespace IAD_Project.Views
 
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ModuleOverviewPage(YEARNUM, MODULE_INDEX));
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX));
 
         }// btnBACK_Clicked()
-    }
+
+    }// AssessmentOverviewPage
+
 }
