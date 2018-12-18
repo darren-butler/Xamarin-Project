@@ -42,7 +42,7 @@ namespace IAD_Project.Views
                         course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments.Add(new Assessment(entAssessmentName.Text, weight));
 
                         course.SerializeCourse(); // save course to JSON file
-                        await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX));
+                        await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX), false);
                     }
 
                 }

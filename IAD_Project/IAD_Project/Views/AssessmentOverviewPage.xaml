@@ -3,17 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IAD_Project.Views.AssessmentOverviewPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
             
-            <Label x:Name="lblAssessmentName" Text="Assessment: " />
-            <Label x:Name="lblAssessmentWeight" Text="Weight: " />
-            <Label x:Name="lblAssessmentGrade" Text="Grade: " />
+        <StackLayout Style="{StaticResource stkOuter}">
 
-            <Button x:Name="btnUpdateGrade" Clicked="btnUpdateGrade_Clicked" Text="Enter Grade" />
-            <Entry x:Name="entUpdateGrade" Placeholder="Grade" IsVisible="False" Keyboard="Numeric"/>
+            <StackLayout Style="{StaticResource stkWarning}">
+            </StackLayout>
 
-            <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Module Overview" />
-            <Button x:Name="btnEditAssessment" Clicked="btnEditAssessment_Clicked" Text="Edit Assessment Details" />
+            <StackLayout Style="{StaticResource stkTitle}">
+                <Label x:Name="lblAssessmentName" Text="Assessment: " />
+                <Label x:Name="lblAssessmentWeight" Text="Weight: " />
+                <Label x:Name="lblAssessmentGrade" Text="Grade: " />
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource stkContent} " x:Name="layout">
+                <Entry x:Name="entUpdateGrade" Placeholder="Grade" IsVisible="False" Keyboard="Numeric" />
+                <Button x:Name="btnUpdateGrade" Clicked="btnUpdateGrade_Clicked" Text="Enter Grade" />
+                <Button x:Name="btnEditAssessment" Clicked="btnEditAssessment_Clicked" Text="Edit Assessment Details" />
+
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource stkBack}">
+                <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Module Overview" />
+            </StackLayout>
 
         </StackLayout>
 

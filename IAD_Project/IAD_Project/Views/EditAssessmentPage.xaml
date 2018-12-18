@@ -3,22 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IAD_Project.Views.EditAssessmentPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-            <Label Text="Edit Assessment Page" />
 
-            <Button x:Name="btnEditName" Clicked="btnEditName_Clicked" Text="Edit Name" />
-            <Entry x:Name="entEditName" Placeholder="Name" IsVisible="False"/>
+        <StackLayout Style="{StaticResource stkOuter}">
 
-            <Button x:Name="btnEditWeight" Clicked="btnEditWeight_Clicked" Text="Edit Weight" />
-            <Entry x:Name="entEditWeight" Placeholder="Weight" IsVisible="False" Keyboard="Numeric"/>
+            <StackLayout Style="{StaticResource stkWarning}">
+            </StackLayout>
 
-            <Button x:Name="btnDeleteAssessment" Clicked="btnDeleteAssessment_Clicked" Text="Delete Assessment" />
+            <StackLayout Style="{StaticResource stkTitle}">
+                <Label Text="Edit Assessment Page" />
+            </StackLayout>
 
-            <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Assessment Overview" />
+            <StackLayout Style="{StaticResource stkContent} " x:Name="layout">
+                <Button x:Name="btnEditName" Clicked="btnEditName_Clicked" Text="Edit Name" />
+                <Entry x:Name="entEditName" Placeholder="Name" IsVisible="False"/>
 
+                <Button x:Name="btnEditWeight" Clicked="btnEditWeight_Clicked" Text="Edit Weight" />
+                <Entry x:Name="entEditWeight" Placeholder="Weight" IsVisible="False" Keyboard="Numeric"/>
 
+                <Button x:Name="btnDeleteAssessment" Clicked="btnDeleteAssessment_Clicked" Text="Delete Assessment" />
+            </StackLayout>
 
-
+            <StackLayout Style="{StaticResource stkBack}">
+                <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Assessment Overview" />
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>

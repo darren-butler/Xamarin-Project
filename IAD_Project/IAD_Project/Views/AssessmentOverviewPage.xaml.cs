@@ -59,15 +59,34 @@ namespace IAD_Project.Views
             if(isUpdateClicked == true)
             {
                 entUpdateGrade.IsVisible = true;
+                btnUpdateGrade.Text = "Update";
             }
             else if (isUpdateClicked == false)
             {
-                course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade = float.Parse(entUpdateGrade.Text);
-                lblAssessmentGrade.Text = "Grade: " + course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString();
+                // if - check if entry boxes are empty
+                if (entUpdateGrade.Text != null)
+                {
+                    // if - check if weight is a viable float
+                    if (float.TryParse(entUpdateGrade.Text, out float grade))
+                    {
 
-                course.SerializeCourse(); // save course to JSON file
+                        // if - check if wieght is within usable range
+                        if (grade >= 0 && grade <= 100)
+                        {
+                            course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade = grade;
+                            lblAssessmentGrade.Text = "Grade: " + course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString();
 
-                entUpdateGrade.IsVisible = false;
+                            course.SerializeCourse(); // save course to JSON file
+
+                            entUpdateGrade.IsVisible = false;
+                            btnUpdateGrade.Text = "Enter Grade";
+                        }
+
+                    }
+
+                }// if
+
+
             }
 
         }// btnUpdateGrade_Clicked()
@@ -76,14 +95,14 @@ namespace IAD_Project.Views
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX));
+            await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX), false);
 
         }// btnBACK_Clicked()
 
         private async void btnEditAssessment_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new EditAssessmentPage(course, YEAR_INDEX, MODULE_INDEX, ASSESSMENT_INDEX));
+            await Navigation.PushAsync(new EditAssessmentPage(course, YEAR_INDEX, MODULE_INDEX, ASSESSMENT_INDEX), false);
         }
     }// AssessmentOverviewPage
 
