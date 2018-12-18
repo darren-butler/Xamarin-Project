@@ -90,7 +90,7 @@ namespace IAD_Project.Views
             int btnIndex = int.Parse(button.ClassId);
 
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new AssessmentOverviewPage(course, YEAR_INDEX, MODULE_INDEX, btnIndex));
+            await Navigation.PushAsync(new AssessmentOverviewPage(course, YEAR_INDEX, MODULE_INDEX, btnIndex), false);
 
         }// btnAssessmentPage_Clicked()
 
@@ -101,7 +101,7 @@ namespace IAD_Project.Views
             int moduleInex = MODULE_INDEX;
 
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new NewAssessmentPage(course, YEAR_INDEX, MODULE_INDEX));
+            await Navigation.PushAsync(new NewAssessmentPage(course, YEAR_INDEX, MODULE_INDEX), false);
 
         }// btnAddAssessment_Clicked()
 
@@ -109,7 +109,7 @@ namespace IAD_Project.Views
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new YearOverviewPage(course, YEAR_INDEX));
+            await Navigation.PushAsync(new YearOverviewPage(course, YEAR_INDEX), false);
 
         }// btnBACK_Clicked()
 

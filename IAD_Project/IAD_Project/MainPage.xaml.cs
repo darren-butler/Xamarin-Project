@@ -32,7 +32,7 @@ namespace IAD_Project
 
         private async void btnNewCourse_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new NewCoursePage());
+            await Navigation.PushAsync(new NewCoursePage(), false);
 
         }// btnNewCourse_Clicked()
 
@@ -40,7 +40,7 @@ namespace IAD_Project
         private async void btnCourseOverviewPage_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new CourseOverviewPage(course));
+            await Navigation.PushAsync(new CourseOverviewPage(course), false);
 
         }// btnCourseOverviewPage_Clicked()
 

@@ -3,20 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IAD_Project.Views.ModuleOverviewPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
 
-            <Label x:Name="lblModuleOverviewTitle" Text="" HorizontalTextAlignment="Center"/>
-            <Label x:Name="lblModuleGrade" Text="" HorizontalTextAlignment="Center" />
-            <Button x:Name="btnAddAssessment" Clicked="btnAddAssessment_Clicked" Text="Assessments: +" />
-            
-            <StackLayout x:Name="layout">
-                
+        <StackLayout Style="{StaticResource stkOuter}">
+
+            <StackLayout Style="{StaticResource stkWarning}">
+                <Label x:Name="btnWarningMessage" Text="WARNING - GRADE WEIGHTS EXCEED 100%" TextColor="Red" IsVisible="False"/>
             </StackLayout>
 
-            <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Year Overview" />
+            <StackLayout Style="{StaticResource stkTitle}">
+                <Label x:Name="lblModuleOverviewTitle" Text="" HorizontalTextAlignment="Center"/>
+                <Label x:Name="lblModuleGrade" Text="" HorizontalTextAlignment="Center" />
+                <Button x:Name="btnAddAssessment" Clicked="btnAddAssessment_Clicked" Text="Assessments: +" />
+            </StackLayout>
 
-            <Label x:Name="btnWarningMessage" Text="WARNING - GRADE WEIGHTS EXCEED 100%" TextColor="Red" IsVisible="False"/>  
+            <StackLayout Style="{StaticResource stkContent} " x:Name="layout">
+
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource stkBack}">
+                <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Year Overview" />
+            </StackLayout>
 
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

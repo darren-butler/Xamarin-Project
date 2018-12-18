@@ -20,6 +20,8 @@ namespace IAD_Project.Views
 
             SetupYearButtons();
 
+            lblTitle.Text = course.Name;
+
         }// CourseOverviewPage()
 
 
@@ -60,7 +62,7 @@ namespace IAD_Project.Views
             int btnIndex = int.Parse(button.ClassId); // parse out button ID (i)
 
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new YearOverviewPage(course, btnIndex));
+            await Navigation.PushAsync(new YearOverviewPage(course, btnIndex), false);
 
         }// btnYearPage_Clicked()
 
@@ -68,7 +70,7 @@ namespace IAD_Project.Views
         private async void btnBack_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new MainPage(), false);
 
         }// btnBack_Clicked()
 

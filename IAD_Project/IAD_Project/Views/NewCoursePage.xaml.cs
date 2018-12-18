@@ -28,7 +28,7 @@ namespace IAD_Project.Views
                         Course course = new Course(entCourseName.Text, int.Parse(entCoureNumOfYears.Text));
                         course.SerializeCourse(); // save course to JSON file
 
-                        await Navigation.PushAsync(new CourseOverviewPage(course));
+                        await Navigation.PushAsync(new CourseOverviewPage(course), false);
                     }
 
                 }

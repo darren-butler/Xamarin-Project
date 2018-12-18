@@ -38,7 +38,7 @@ namespace IAD_Project.Views
                         course.Years[YEAR_INDEX].Modules.Add(new Module(entModuleName.Text.ToString(), credits));
                         course.SerializeCourse(); // save course to JSON file
 
-                        await Navigation.PushAsync(new YearOverviewPage(course, YEAR_INDEX));
+                        await Navigation.PushAsync(new YearOverviewPage(course, YEAR_INDEX), false);
                     }
 
                 }

@@ -89,7 +89,7 @@ namespace IAD_Project.Views
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new AssessmentOverviewPage(course, YEAR_INDEX, MODULE_INDEX, ASSESSMENT_INDEX));
+            await Navigation.PushAsync(new AssessmentOverviewPage(course, YEAR_INDEX, MODULE_INDEX, ASSESSMENT_INDEX), false);
 
         }// btnBACK_Clicked()
 
@@ -98,7 +98,7 @@ namespace IAD_Project.Views
             course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments.RemoveAt(ASSESSMENT_INDEX);
             course.SerializeCourse(); // save course to JSON file
 
-            await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX));
+            await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX), false);
         }
     }
 }
