@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IAD_Project.Views.EditModulePage">
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout Style="{StaticResource stkOuter}">
 
             <StackLayout Style="{StaticResource stkWarning}">
@@ -28,5 +29,6 @@
             </StackLayout>
 
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
