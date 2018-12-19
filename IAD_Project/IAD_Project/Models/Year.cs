@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace IAD_Project.Models
 {
-    [Serializable()]
     public class Year
     {
         // 1. Vars

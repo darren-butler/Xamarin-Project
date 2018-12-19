@@ -1,10 +1,5 @@
 ﻿using IAD_Project.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,26 +9,30 @@ namespace IAD_Project.Views
     public partial class EditAssessmentPage : ContentPage
     {
         // Vars
-        Course course = new Course();
+        Course course;
         int YEAR_INDEX;
         int MODULE_INDEX;
         int ASSESSMENT_INDEX;
 
-
         bool isEditNameClicked = false;
         bool isEditWeightClicked = false;
 
-        public EditAssessmentPage(Course c, int yearNum, int moduleIndex, int assessmentIndex)
+        public EditAssessmentPage(int yearNum, int moduleIndex, int assessmentIndex)
         {
             InitializeComponent();
 
             // Initialize & Assign Course Variables
-            course = c.DeepCopy();
+            course = Utility.DeserializeCourse();
             YEAR_INDEX = yearNum;
             MODULE_INDEX = moduleIndex;
             ASSESSMENT_INDEX = assessmentIndex;
 
-        }
+            // UI setup
+            lblTitle.Text = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Name;
+            lblWeight.Text = "Weight: " + (course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Weight * 100).ToString("n2") + "%";
+
+        }// EditAssessmentPage()
+
 
         private void btnEditName_Clicked(object sender, EventArgs e)
         {
@@ -43,14 +42,22 @@ namespace IAD_Project.Views
             {
                 entEditName.IsVisible = true;
                 btnEditName.Text = "Update";
+                entEditName.Placeholder = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Name;
             }
             else
             {
                 course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Name = entEditName.Text;
+                course.SerializeCourse(); // save course to JSON file
+
+                lblTitle.Text = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Name; // update title label with new name
+
                 entEditName.IsVisible = false;
                 btnEditName.Text = "Edit Name";
-            }
-        }
+
+            }// if
+
+        }// btnEditName_Clicked()
+
 
         private void btnEditWeight_Clicked(object sender, EventArgs e)
         {
@@ -60,6 +67,7 @@ namespace IAD_Project.Views
             {
                 entEditWeight.IsVisible = true;
                 btnEditWeight.Text = "Update";
+                entEditWeight.Placeholder = (course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Weight * 100).ToString("n2") + "%";
             }
             else
             {
@@ -75,21 +83,27 @@ namespace IAD_Project.Views
                         if (weight > 0 && weight <= 1)
                         {
                             course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Weight = weight;
+                            course.SerializeCourse(); // save course to JSON file
+
+                            lblWeight.Text = "Weight: " + (course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Weight * 100).ToString("n2"); // update title weight
+
                             entEditWeight.IsVisible = false;
                             btnEditWeight.Text = "Edit Weight";
                         }
 
                     }
 
-                }// if
+                }
 
-            }
-        }
+            }// if
+
+        }// btnEditWeight_Clicked()
+
 
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new AssessmentOverviewPage(course, YEAR_INDEX, MODULE_INDEX, ASSESSMENT_INDEX), false);
+            await Navigation.PushAsync(new AssessmentOverviewPage(YEAR_INDEX, MODULE_INDEX, ASSESSMENT_INDEX), false);
 
         }// btnBACK_Clicked()
 
@@ -98,7 +112,8 @@ namespace IAD_Project.Views
             course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments.RemoveAt(ASSESSMENT_INDEX);
             course.SerializeCourse(); // save course to JSON file
 
-            await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX), false);
-        }
+            await Navigation.PushAsync(new ModuleOverviewPage(YEAR_INDEX, MODULE_INDEX), false);
+
+        }// btnDeleteAssessment_Clicked()
     }
 }

@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace IAD_Project.Models
 {
-    [Serializable()]
     public class Course
     {
         // 1. Vars

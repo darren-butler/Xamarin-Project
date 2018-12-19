@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IAD_Project.Views.AssessmentOverviewPage">
     <ContentPage.Content>
-            
         <StackLayout Style="{StaticResource stkOuter}">
 
             <StackLayout Style="{StaticResource stkWarning}">
+                <Button x:Name="btnEditAssessment" Clicked="btnEditAssessment_Clicked" Text="Edit Assessment" />
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkTitle}">
-                <Label x:Name="lblAssessmentName" Text="Assessment: " />
+                <Label x:Name="lblAssessmentName" Text="" />
                 <Label x:Name="lblAssessmentWeight" Text="Weight: " />
                 <Label x:Name="lblAssessmentGrade" Text="Grade: " />
             </StackLayout>
@@ -18,8 +18,6 @@
             <StackLayout Style="{StaticResource stkContent} " x:Name="layout">
                 <Entry x:Name="entUpdateGrade" Placeholder="Grade" IsVisible="False" Keyboard="Numeric" />
                 <Button x:Name="btnUpdateGrade" Clicked="btnUpdateGrade_Clicked" Text="Enter Grade" />
-                <Button x:Name="btnEditAssessment" Clicked="btnEditAssessment_Clicked" Text="Edit Assessment Details" />
-
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkBack}">
@@ -27,6 +25,5 @@
             </StackLayout>
 
         </StackLayout>
-
     </ContentPage.Content>
 </ContentPage>

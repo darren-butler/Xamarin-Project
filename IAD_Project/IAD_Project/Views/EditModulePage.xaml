@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IAD_Project.Views.EditAssessmentPage">
+             x:Class="IAD_Project.Views.EditModulePage">
     <ContentPage.Content>
         <StackLayout Style="{StaticResource stkOuter}">
 
@@ -10,21 +10,21 @@
 
             <StackLayout Style="{StaticResource stkTitle}">
                 <Label x:Name="lblTitle" Text="" />
-                <Label x:Name="lblWeight" Text="" />
+                <Label x:Name="lblTitleCredits" Text="" />
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkContent}" >
                 <Entry x:Name="entEditName" Placeholder="Name" IsVisible="False"/>
                 <Button x:Name="btnEditName" Clicked="btnEditName_Clicked" Text="Edit Name" />
+                
+                <Entry x:Name="entEditCredits" Placeholder="Credits" IsVisible="False" Keyboard="Numeric"/>
+                <Button x:Name="btnEditCredits" Clicked="btnEditCredits_Clicked" Text="Edit Credits" />
 
-                <Entry x:Name="entEditWeight" Placeholder="Weight" IsVisible="False" Keyboard="Numeric"/>
-                <Button x:Name="btnEditWeight" Clicked="btnEditWeight_Clicked" Text="Edit Weight" />
-
-                <Button x:Name="btnDeleteAssessment" Clicked="btnDeleteAssessment_Clicked" Text="Delete Assessment" BackgroundColor="#731b22"/>
+                <Button x:Name="btnDeleteModile" Clicked="btnDeleteModile_Clicked" Text="Delete Module" BackgroundColor="#731b22"/>
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkBack}">
-                <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Assessment Overview" />
+                <Button x:Name="btnBACK" Clicked="btnBACK_Clicked" Text="← Module Overview" />
             </StackLayout>
 
         </StackLayout>

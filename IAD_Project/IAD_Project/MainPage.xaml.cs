@@ -8,7 +8,7 @@ namespace IAD_Project
     public partial class MainPage : ContentPage
     {
         // Vars
-        Course course = new Course();
+        Course course;
 
         public MainPage()
         {
@@ -16,10 +16,9 @@ namespace IAD_Project
 
             try // test if CourseData.txt file already exists
             {
-                Course c = Utility.DeserializeCourse();
-                course = c.DeepCopy();
-
-                btnCourseOverviewPage.IsVisible = btnDeleteCourse.IsVisible = true;
+                course = Utility.DeserializeCourse();
+                btnCourseOverviewPage.IsVisible  = true;
+                btnCourseOverviewPage.Text = course.Name;
 
             }
             catch
@@ -44,13 +43,13 @@ namespace IAD_Project
 
         }// btnCourseOverviewPage_Clicked()
 
-        private void btnDeleteCourse_Clicked(object sender, EventArgs e)
+        private async void btnEditCourse_Clicked(object sender, EventArgs e)
         {
-            btnCourseOverviewPage.IsVisible = btnDeleteCourse.IsVisible = false;
+            await Navigation.PushAsync(new EditCoursePage(), false);
 
-            btnNewCourse.IsVisible = true;
+        }// btnEditCourse_Clicked()
 
-        }
+
     }// MainPage
 
 }

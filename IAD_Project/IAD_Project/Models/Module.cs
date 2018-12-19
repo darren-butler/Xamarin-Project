@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace IAD_Project.Models
 {
-    [Serializable()]
     public class Module
     {
         // 1. Vars

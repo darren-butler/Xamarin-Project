@@ -9,16 +9,16 @@ namespace IAD_Project.Views
 	public partial class ModuleOverviewPage : ContentPage
 	{
         // Vars
-        Course course = new Course();
+        Course course;
         int YEAR_INDEX;
         int MODULE_INDEX;
 
-        public ModuleOverviewPage(Course c, int yearNum, int moduleIndex)
+        public ModuleOverviewPage(int yearNum, int moduleIndex)
         {
             InitializeComponent();
 
             // Initialize & Assign Course Variables
-            course = c.DeepCopy();
+            course = Utility.DeserializeCourse();
             YEAR_INDEX = yearNum;
             MODULE_INDEX = moduleIndex;
 
@@ -50,8 +50,8 @@ namespace IAD_Project.Views
             }
 
             // Add Module name & credits to page labels
-            lblModuleOverviewTitle.Text = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Name +
-                " (" + course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Credits + " Credits)";
+            lblModuleOverviewTitle.Text = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Name;
+            lblModuleOverviewCredits.Text = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Credits + " Credits";
             lblModuleGrade.Text = "Grade: " + grade;
 
             // if - Validate if grade module assessment weight total exceed 1;
@@ -74,8 +74,8 @@ namespace IAD_Project.Views
                 // Same technique as in CourseOverviewPage
                 Button btn = new Button();
                 btn.Clicked += new EventHandler(btnAssessmentPage_Clicked);
-                btn.Text = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[i].Name + ", " +
-                    course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[i].Grade + "%";
+                btn.Text = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[i].Name + ": " +
+                    course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[i].Grade.ToString("n2") + "%";
                 btn.ClassId = i.ToString();
 
                 layout.Children.Add(btn);
@@ -90,7 +90,7 @@ namespace IAD_Project.Views
             int btnIndex = int.Parse(button.ClassId);
 
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new AssessmentOverviewPage(course, YEAR_INDEX, MODULE_INDEX, btnIndex), false);
+            await Navigation.PushAsync(new AssessmentOverviewPage(YEAR_INDEX, MODULE_INDEX, btnIndex), false);
 
         }// btnAssessmentPage_Clicked()
 
@@ -101,7 +101,7 @@ namespace IAD_Project.Views
             int moduleInex = MODULE_INDEX;
 
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new NewAssessmentPage(course, YEAR_INDEX, MODULE_INDEX), false);
+            await Navigation.PushAsync(new NewAssessmentPage(YEAR_INDEX, MODULE_INDEX), false);
 
         }// btnAddAssessment_Clicked()
 
@@ -109,9 +109,16 @@ namespace IAD_Project.Views
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new YearOverviewPage(course, YEAR_INDEX), false);
+            await Navigation.PushAsync(new YearOverviewPage(YEAR_INDEX), false);
 
         }// btnBACK_Clicked()
+
+        private async void btnEditModule_Clicked(object sender, EventArgs e)
+        {
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new EditModulePage(YEAR_INDEX, MODULE_INDEX), false);
+
+        }// btnEditModule_Clicked()
 
     }// ModuleOverviewPage
 
