@@ -9,7 +9,7 @@ namespace IAD_Project.Views
 	public partial class NewModulePage : ContentPage
 	{
         // Vars
-        Course course = new Course();
+        Course course;
         int YEAR_INDEX;
         
 		public NewModulePage (Course c, int yearNum)
@@ -17,7 +17,7 @@ namespace IAD_Project.Views
 			InitializeComponent ();
 
             // Initialize & Assign Course Variables
-            course = c.DeepCopy();
+            course = Utility.DeserializeCourse();
             YEAR_INDEX = yearNum;
 
         }// NewModulePage()
@@ -38,7 +38,7 @@ namespace IAD_Project.Views
                         course.Years[YEAR_INDEX].Modules.Add(new Module(entModuleName.Text.ToString(), credits));
                         course.SerializeCourse(); // save course to JSON file
 
-                        await Navigation.PushAsync(new YearOverviewPage(course, YEAR_INDEX), false);
+                        await Navigation.PushAsync(new YearOverviewPage(YEAR_INDEX), false);
                     }
 
                 }
@@ -46,6 +46,13 @@ namespace IAD_Project.Views
             }// if
 
         }// btnAddNewModule_Clicked()
+
+        private async void btnBACK_Clicked(object sender, EventArgs e)
+        {
+            course.SerializeCourse(); // save course to JSON file
+            await Navigation.PushAsync(new YearOverviewPage(YEAR_INDEX), false);
+
+        }// btnBACK_Clicked()
 
     }// NewModulePage
 

@@ -7,20 +7,19 @@
     <StackLayout Style="{StaticResource stkOuter}">
 
         <StackLayout Style="{StaticResource stkWarning}">
-            
+            <Button x:Name="btnEditCourse" Clicked="btnEditCourse_Clicked" Text="Edit Course" />
         </StackLayout>
 
         <StackLayout Style="{StaticResource stkTitle}">
-            <Label Text="Grade Calculator!" />
+            <Label Text="myGrades.Manage()" />
         </StackLayout>
 
         <StackLayout Style="{StaticResource stkContent}">
             <Button x:Name="btnNewCourse" Clicked="btnNewCourse_Clicked" Text="New Course" IsVisible="False" />
-            <Button x:Name="btnCourseOverviewPage" Clicked="btnCourseOverviewPage_Clicked" Text="My Course" IsVisible="False" />
+            <Button x:Name="btnCourseOverviewPage" Clicked="btnCourseOverviewPage_Clicked" Text="" IsVisible="False" />
         </StackLayout>
 
         <StackLayout Style="{StaticResource stkBack}">
-            <Button x:Name="btnDeleteCourse" Clicked="btnDeleteCourse_Clicked" Text="Delete Course" IsVisible="False" />
         </StackLayout>
 
         

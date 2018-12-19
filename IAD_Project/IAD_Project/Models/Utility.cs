@@ -18,18 +18,12 @@ namespace IAD_Project.Models
 
         }// DeserializeCourse()
 
-        // Deep Copy method - https://stackoverflow.com/questions/129389/how-do-you-do-a-deep-copy-of-an-object-in-net-c-specifically
-        public static Course DeepCopy<Course>(this Course course)
+        public static void DeleteCourse()
         {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, course);
-                stream.Position = 0;
-                return (Course)formatter.Deserialize(stream);
-            }
-
-        }// DeepCopy()
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string filename = Path.Combine(path, "CourseData.txt");
+            File.Delete(filename);
+        }
 
     }// Utility
 

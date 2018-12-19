@@ -1,13 +1,25 @@
-﻿^contentpage {
-    background-color: #173c57;
+﻿/* Color Palette
+
+    Black: #171a21
+    DarkBlue: #173d58
+    Blue: #367096
+    LightBlue: #e3eaef
+    Green: #5c7e10
+    Red: #731b22
+
+*/
+
+contentpage {
+    background-color: #171a21;
 }
-^stacklayout {
-    border-color: #171a21;
-    color: #d9d5ca;
+stacklayout {
+    background-color: #173d58;
+    color: #e3eaef;
+
 }
-^button {
+button {
     background-color: #367096;
     border-color: #171a21;
 }
-^label {
-}
+
+

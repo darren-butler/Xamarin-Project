@@ -9,16 +9,16 @@ namespace IAD_Project.Views
 	public partial class NewAssessmentPage : ContentPage
 	{
         // Vars
-        Course course = new Course();
+        Course course;
         int YEAR_INDEX;
         int MODULE_INDEX;
 
-        public NewAssessmentPage (Course c, int yearNum, int moduleIndex)
+        public NewAssessmentPage (int yearNum, int moduleIndex)
 		{
 			InitializeComponent ();
 
             // Initialize & Assign Course Variables
-            course = c.DeepCopy();
+            course = Utility.DeserializeCourse();
             YEAR_INDEX = yearNum;
             MODULE_INDEX = moduleIndex;
 
@@ -40,9 +40,8 @@ namespace IAD_Project.Views
                     {
                         // Create new Assessment with above paramteres and add to Assessments list
                         course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments.Add(new Assessment(entAssessmentName.Text, weight));
-
                         course.SerializeCourse(); // save course to JSON file
-                        await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX), false);
+                        await Navigation.PushAsync(new ModuleOverviewPage(YEAR_INDEX, MODULE_INDEX), false);
                     }
 
                 }
@@ -50,6 +49,13 @@ namespace IAD_Project.Views
             }// if
 
         }// btnAddNewAssessment_Clicked()
+
+
+        private async void btnBACK_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ModuleOverviewPage(YEAR_INDEX, MODULE_INDEX), false);
+
+        }// btnBACK_Clicked()
 
     }// NewAssessmentPage
 

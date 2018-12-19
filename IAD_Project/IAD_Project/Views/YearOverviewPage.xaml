@@ -3,21 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IAD_Project.Views.YearOverviewPage">
     <ContentPage.Content>
-
         <StackLayout Style="{StaticResource stkOuter}">
 
             <StackLayout Style="{StaticResource stkWarning}">
 
             </StackLayout>
 
-            <StackLayout Style="{StaticResource stkTitle}">
+            <StackLayout Style="{StaticResource stkTitle}" x:Name="layout">
                 <Label x:Name="lblYearOverviewTitle" Text="" HorizontalTextAlignment="Center"/>
+                <Label x:Name="lblYearOverviewYear" Text="" HorizontalTextAlignment="Center"/>
                 <Label x:Name="lblYearAverage" Text="" HorizontalTextAlignment="Center"/>
-                <Button x:Name="btnAddModule" Clicked="btnAddModule_Clicked" Text="+" />
             </StackLayout>
 
-            <StackLayout Style="{StaticResource stkContent} " x:Name="layout">
-
+            <StackLayout Style="{StaticResource stkContent} " >
+                <Button x:Name="btnAddModule" Clicked="btnAddModule_Clicked" Text="+ Add Module" BackgroundColor="#5c7e10"/>
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkBack}">
@@ -25,6 +24,5 @@
             </StackLayout>
 
         </StackLayout>
-        
     </ContentPage.Content>
 </ContentPage>

@@ -3,21 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IAD_Project.Views.ModuleOverviewPage">
     <ContentPage.Content>
-
         <StackLayout Style="{StaticResource stkOuter}">
 
             <StackLayout Style="{StaticResource stkWarning}">
-                <Label x:Name="btnWarningMessage" Text="WARNING - GRADE WEIGHTS EXCEED 100%" TextColor="Red" IsVisible="False"/>
+                <Button x:Name="btnEditModule" Clicked="btnEditModule_Clicked" Text="Edit Module" />
+                <Label x:Name="btnWarningMessage" Text="WARNING - GRADE WEIGHTS EXCEED 100%" TextColor="#731b22" IsVisible="False" FontSize="Small"/>
             </StackLayout>
 
-            <StackLayout Style="{StaticResource stkTitle}">
+            <StackLayout Style="{StaticResource stkTitle}" x:Name="layout">
                 <Label x:Name="lblModuleOverviewTitle" Text="" HorizontalTextAlignment="Center"/>
+                <Label x:Name="lblModuleOverviewCredits" Text="" HorizontalTextAlignment="Center"/>
                 <Label x:Name="lblModuleGrade" Text="" HorizontalTextAlignment="Center" />
-                <Button x:Name="btnAddAssessment" Clicked="btnAddAssessment_Clicked" Text="Assessments: +" />
             </StackLayout>
 
-            <StackLayout Style="{StaticResource stkContent} " x:Name="layout">
-
+            <StackLayout Style="{StaticResource stkContent} " >
+                <Button x:Name="btnAddAssessment" Clicked="btnAddAssessment_Clicked" Text="+ Assessment" BackgroundColor="#5c7e10"/>
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkBack}">
@@ -25,6 +25,5 @@
             </StackLayout>
 
         </StackLayout>
-        
     </ContentPage.Content>
 </ContentPage>

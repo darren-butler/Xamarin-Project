@@ -9,15 +9,15 @@ namespace IAD_Project.Views
 	public partial class YearOverviewPage : ContentPage
 	{
         // Vars
-        Course course = new Course();
+        Course course;
         int YEAR_INDEX;
 
-        public YearOverviewPage (Course c, int yearNum)
+        public YearOverviewPage (int yearNum)
 		{           
             InitializeComponent ();
 
             // Initialize & Assign Course Variables
-            course = c.DeepCopy();
+            course = Utility.DeserializeCourse();
             YEAR_INDEX = yearNum;
 
             Display();
@@ -46,8 +46,9 @@ namespace IAD_Project.Views
             }
 
             // Add Course Name, Year Number & Year Average to title labels
-            lblYearOverviewTitle.Text = course.Name + " Year: " + course.Years[YEAR_INDEX].YearNumber;
-            lblYearAverage.Text = "GPA: " + gradeAverage;
+            lblYearOverviewTitle.Text = course.Name;
+            lblYearOverviewYear.Text = "Year " + course.Years[YEAR_INDEX].YearNumber;
+            lblYearAverage.Text = "Average: " + gradeAverage;
 
         }// SetupPageTitles()
 
@@ -87,7 +88,7 @@ namespace IAD_Project.Views
             int btnIndex = int.Parse(button.ClassId); // parse out button ID (i)
 
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, btnIndex), false);
+            await Navigation.PushAsync(new ModuleOverviewPage(YEAR_INDEX, btnIndex), false);
 
         }// btnModulePage_Clicked()
 

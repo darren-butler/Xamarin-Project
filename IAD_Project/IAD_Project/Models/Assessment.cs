@@ -2,7 +2,6 @@
 
 namespace IAD_Project.Models
 {
-    [Serializable()]
     public class Assessment
     {
         // 1. Vars

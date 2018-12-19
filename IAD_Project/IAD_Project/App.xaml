@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IAD_Project.App">
     <Application.Resources>
-        
+
         <StyleSheet Source="Styles/Student'sToolkit.css" />
-        
+
         <Style TargetType="Label">
             <Setter Property="FontFamily">
                 <Setter.Value>
@@ -15,6 +15,8 @@
                     </OnPlatform>
                 </Setter.Value>
             </Setter>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="Medium" />
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily">
@@ -35,38 +37,41 @@
                     </OnPlatform>
                 </Setter.Value>
             </Setter>
+            <Setter Property="BackgroundColor" Value="#367096" />
+            <Setter Property="TextColor" Value="#e3eaef" />
         </Style>
 
-        <ResourceDictionary >
+        <!--<ResourceDictionary >
             <Color x:Key="clrBlack">#171a21</Color>
             <Color x:Key="clrDarkBlue">#15354d</Color>
             <Color x:Key="clrBlue">#367096</Color>
             <Color x:Key="clrLightBlue">#e0e8ed</Color>
             <Color x:Key="clrGreen">#5c7e10</Color>
-        </ResourceDictionary>
+        </ResourceDictionary>-->
 
         <Style TargetType="StackLayout" x:Key="stkOuter">
-            <Setter Property="Margin" Value="20,20,20,20" />
+            <Setter Property="Padding" Value="20, 20, 20, 20" />
         </Style>
-        
+
         <Style TargetType="StackLayout" x:Key="stkWarning">
             <Setter Property="VerticalOptions" Value="StartAndExpand" />
         </Style>
-        
+
         <Style TargetType="StackLayout" x:Key="stkTitle">
             <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="WidthRequest" Value="300" />
+            <Setter Property="Margin" Value="0, 0, 0, 25" />
         </Style>
-        
+
         <Style TargetType="StackLayout" x:Key="stkContent">
             <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="WidthRequest" Value="300" />
+            <Setter Property="Margin" Value="0, 25, 0, 0" />
         </Style>
-        
+
         <Style TargetType="StackLayout" x:Key="stkBack">
             <Setter Property="VerticalOptions" Value="EndAndExpand" />
         </Style>
 
     </Application.Resources>
-
-
-
 </Application>

@@ -9,19 +9,20 @@ namespace IAD_Project.Views
 	public partial class AssessmentOverviewPage : ContentPage
 	{
         // Vars
-        Course course = new Course();
+        Course course;
         int YEAR_INDEX;
         int MODULE_INDEX;
         int ASSESSMENT_INDEX;
         
         bool isUpdateClicked = false;
 
-        public AssessmentOverviewPage (Course c, int yearNum, int moduleIndex, int assessmentIndex)
+        public AssessmentOverviewPage (int yearNum, int moduleIndex, int assessmentIndex)
 		{
 			InitializeComponent ();
 
             // Initialize & Assign Course Variables
-            course = c.DeepCopy();
+            //course = c.DeepCopy();
+            course = Utility.DeserializeCourse();
             YEAR_INDEX = yearNum;
             MODULE_INDEX = moduleIndex;
             ASSESSMENT_INDEX = assessmentIndex;
@@ -40,11 +41,11 @@ namespace IAD_Project.Views
             // if - Grade has not been added by user
             if (course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade == 0)
             {
-                lblAssessmentGrade.Text += "n/a"; // set grade value to n/a
+                lblAssessmentGrade.Text += "NA"; // set grade value to n/a
             }
             else
             {
-                lblAssessmentGrade.Text += course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString("n2"); // set grade value to user entered value
+                lblAssessmentGrade.Text += course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString("n2") + "%"; // set grade value to user entered value
             }
 
         }// displayAssessmentOverview()
@@ -60,6 +61,7 @@ namespace IAD_Project.Views
             {
                 entUpdateGrade.IsVisible = true;
                 btnUpdateGrade.Text = "Update";
+                entUpdateGrade.Placeholder = course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString("n2");
             }
             else if (isUpdateClicked == false)
             {
@@ -74,9 +76,9 @@ namespace IAD_Project.Views
                         if (grade >= 0 && grade <= 100)
                         {
                             course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade = grade;
-                            lblAssessmentGrade.Text = "Grade: " + course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString();
-
                             course.SerializeCourse(); // save course to JSON file
+
+                            lblAssessmentGrade.Text = "Grade: " + course.Years[YEAR_INDEX].Modules[MODULE_INDEX].Assessments[ASSESSMENT_INDEX].Grade.ToString();
 
                             entUpdateGrade.IsVisible = false;
                             btnUpdateGrade.Text = "Enter Grade";
@@ -84,10 +86,9 @@ namespace IAD_Project.Views
 
                     }
 
-                }// if
+                }
 
-
-            }
+            }// if
 
         }// btnUpdateGrade_Clicked()
 
@@ -95,15 +96,16 @@ namespace IAD_Project.Views
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new ModuleOverviewPage(course, YEAR_INDEX, MODULE_INDEX), false);
+            await Navigation.PushAsync(new ModuleOverviewPage(YEAR_INDEX, MODULE_INDEX), false);
 
         }// btnBACK_Clicked()
 
         private async void btnEditAssessment_Clicked(object sender, EventArgs e)
         {
             course.SerializeCourse(); // save course to JSON file
-            await Navigation.PushAsync(new EditAssessmentPage(course, YEAR_INDEX, MODULE_INDEX, ASSESSMENT_INDEX), false);
+            await Navigation.PushAsync(new EditAssessmentPage(YEAR_INDEX, MODULE_INDEX, ASSESSMENT_INDEX), false);
         }
+
     }// AssessmentOverviewPage
 
 }
