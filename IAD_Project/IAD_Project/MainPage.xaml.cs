@@ -19,6 +19,7 @@ namespace IAD_Project
                 course = Utility.DeserializeCourse();
                 btnCourseOverviewPage.IsVisible  = true;
                 btnCourseOverviewPage.Text = course.Name;
+                btnEditCourse.IsVisible = true;
 
             }
             catch

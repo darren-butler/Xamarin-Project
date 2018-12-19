@@ -49,6 +49,7 @@
     <EnableProguard>true</EnableProguard>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis />
+    <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

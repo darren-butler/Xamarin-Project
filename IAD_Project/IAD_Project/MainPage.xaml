@@ -7,7 +7,7 @@
     <StackLayout Style="{StaticResource stkOuter}">
 
         <StackLayout Style="{StaticResource stkWarning}">
-            <Button x:Name="btnEditCourse" Clicked="btnEditCourse_Clicked" Text="Edit Course" />
+            <Button x:Name="btnEditCourse" Clicked="btnEditCourse_Clicked" Text="Edit Course" IsVisible="False"/>
         </StackLayout>
 
         <StackLayout Style="{StaticResource stkTitle}">
