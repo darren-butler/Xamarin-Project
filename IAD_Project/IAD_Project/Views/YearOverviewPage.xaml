@@ -17,7 +17,7 @@
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkContent} " >
-                <Button x:Name="btnAddModule" Clicked="btnAddModule_Clicked" Text="+ Add Module" BackgroundColor="#5c7e10"/>
+                <Button x:Name="btnAddModule" Clicked="btnAddModule_Clicked" Text="+ Module" BackgroundColor="#5c7e10"/>
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkBack}">

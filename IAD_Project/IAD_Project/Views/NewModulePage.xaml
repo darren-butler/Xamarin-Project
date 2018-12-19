@@ -17,7 +17,7 @@
             <StackLayout Style="{StaticResource stkContent} ">
                 <Entry x:Name="entModuleName" Placeholder="Name" />
                 <Entry x:Name="entModuleCredits" Placeholder="Credits" Keyboard="Numeric"/>
-                <Button x:Name="btnAddNewModule" Clicked="btnAddNewModule_Clicked" Text="+ Add Module" BackgroundColor="#5c7e10" />
+                <Button x:Name="btnAddNewModule" Clicked="btnAddNewModule_Clicked" Text="+ Module" BackgroundColor="#5c7e10" />
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkBack}">

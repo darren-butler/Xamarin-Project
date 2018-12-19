@@ -64,7 +64,7 @@ namespace IAD_Project.Views
             {
                 Button btn = new Button();
                 btn.Clicked += new EventHandler(btnModulePage_Clicked);
-                btn.Text = course.Years[YEAR_INDEX].Modules[i].Name;
+                btn.Text = course.Years[YEAR_INDEX].Modules[i].Name + ": " + course.Years[YEAR_INDEX].Modules[i].Grade.ToString("n2") + "%";
                 btn.ClassId = i.ToString(); // Assign i to button class ID
 
                 layout.Children.Add(btn);
