@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:IAD_Project"
              x:Class="IAD_Project.MainPage">
-
+    <ScrollView>
     <StackLayout Style="{StaticResource stkOuter}">
 
         <StackLayout Style="{StaticResource stkWarning}">
@@ -26,5 +26,5 @@
 
 
     </StackLayout>
-
+    </ScrollView>
 </ContentPage>
