@@ -15,7 +15,7 @@
         </StackLayout>
 
         <StackLayout Style="{StaticResource stkContent}">
-            <Button x:Name="btnNewCourse" Clicked="btnNewCourse_Clicked" Text="New Course" IsVisible="False" />
+                <Button x:Name="btnNewCourse" Clicked="btnNewCourse_Clicked" Text="New Course" IsVisible="False" BackgroundColor="#5c7e10"/>
             <Button x:Name="btnCourseOverviewPage" Clicked="btnCourseOverviewPage_Clicked" Text="" IsVisible="False" />
         </StackLayout>
 

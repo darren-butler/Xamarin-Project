@@ -6,6 +6,15 @@
 
         <StyleSheet Source="Styles/Student'sToolkit.css" />
 
+        <ResourceDictionary>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#173d58" />
+                <Setter Property="BarTextColor" Value="#173d58"/>
+            </Style>
+
+
+        </ResourceDictionary>
+
         <Style TargetType="Label">
             <Setter Property="FontFamily">
                 <Setter.Value>

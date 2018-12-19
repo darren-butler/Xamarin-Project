@@ -16,7 +16,7 @@
             <StackLayout Style="{StaticResource stkContent} " >
                 <Entry x:Name="entAssessmentName" Placeholder="Name" />
                 <Entry x:Name="entAssessmentWeight" Placeholder="Weight (%)" Keyboard="Numeric"/>
-                <Button x:Name="btnAddNewAssessment" Clicked="btnAddNewAssessment_Clicked" Text="Add" />
+                    <Button x:Name="btnAddNewAssessment" Clicked="btnAddNewAssessment_Clicked" Text="+ Assessment" BackgroundColor="#5c7e10" />
             </StackLayout>
 
             <StackLayout Style="{StaticResource stkBack}">
