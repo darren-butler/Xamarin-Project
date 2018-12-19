@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using IAD_Project.Views;
 using IAD_Project.Models;
+using System.Linq;
 
 namespace IAD_Project
 {

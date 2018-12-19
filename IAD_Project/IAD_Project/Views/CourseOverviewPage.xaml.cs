@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using IAD_Project.Models;
+using System.Linq;
 
 namespace IAD_Project.Views
 {
@@ -69,6 +70,19 @@ namespace IAD_Project.Views
 
         private async void btnBack_Clicked(object sender, EventArgs e)
         {
+            //https://stackoverflow.com/questions/28477139/how-do-i-clear-the-navigation-stack
+            var existingPages = Navigation.NavigationStack.ToList();
+
+            if(existingPages.Count > 10)
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    var page = existingPages[i];
+
+                    Navigation.RemovePage(page);
+                }
+            }
+
             course.SerializeCourse(); // save course to JSON file
             await Navigation.PushAsync(new MainPage(), false);
 

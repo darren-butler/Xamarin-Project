@@ -1,5 +1,6 @@
 ﻿using IAD_Project.Models;
 using System;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -105,6 +106,20 @@ namespace IAD_Project.Views
 
         private async void btnBACK_Clicked(object sender, EventArgs e)
         {
+            //https://stackoverflow.com/questions/28477139/how-do-i-clear-the-navigation-stack
+            var existingPages = Navigation.NavigationStack.ToList();
+
+            // if navigation page stack is greater than ten, remove the bottom 7 pages // this was done to stop max heap size OOM error on android
+            if (existingPages.Count > 10)
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    var page = existingPages[i];
+
+                    Navigation.RemovePage(page);
+                }
+            }
+
             course.SerializeCourse(); // save course to JSON file
             await Navigation.PushAsync(new ModuleOverviewPage(YEAR_INDEX, MODULE_INDEX), false);
 
